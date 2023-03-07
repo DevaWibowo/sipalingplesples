@@ -1,0 +1,20 @@
+Parameter Fungsi C++
+
+A. Jenis Parameter:
+1. Parameter Formal: Parameter yang ada di definisi fungsi
+void TambahDamage(double damage){ this->Damage += damage; }
+*di sini, parameter formal adalah double damage
+
+2. Parameter Aktual(Argumen):
+TambahDamage(10);
+*sedangkan di sini, parameter aktual/argumen adalah 10
+
+B. Melewatkan Parameter:
+1. Pass-by-value: hanya menerima value yang diberikan. Memori yang dialokasikan antara argumen dan variabel berbeda.
+2. Pass-by-reference: memori variabel dan parameter akan di-sharing/berbagi, menyebabkan jika kita mengubah value paramater. Maka value variabel akan berubah juga.
+
+C. Parameter Masukkan, Keluaran, dan Masukan/Keluaran
+1. Parameter Masukkan: Parameter yang berfungsi untuk memasukkan variabel ke dalam fungsi
+2. Parameter Keluaran: Parameter yang berfungsi untuk mengubah nilai variabel melalui parameter. Parameter keluaran wajib menggunakan reference(&)
+3. Parameter Masukkan/Keluaran: Parameter yang berfungsi sebagai parameter masukkan sekaligus parameter keluaran
+
