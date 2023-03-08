@@ -1,0 +1,6 @@
+1. Operasi Penjumlahan dan Pengurangan pada Pointer
+Karena array memuat banyak data yang sifatnya sama. Pointer bisa menunjuk indeks ke-n dari array tersebut.
+Awalnya, ketika inisialisasi, pointer akan menunjuk elemen pertama dari array.
+
+2. Pointer ke pointer
+Sejatinya, pointer juga memiliki alamatnya sendiri. Hal ini bisa dibuktikan pada percobaan terlampir berikut.

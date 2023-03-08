@@ -1,0 +1,7 @@
+Parameter argc dan argv
+1. argc(argument count), jumlah argumen, bertipe int untuk menyimpan jumlah argumen yang disertakan
+2. argv(argument vector), vector argumen, bertipe array dari tipe teks, berfungsi untuk menyimpan daftar argumen
+
+Fungsi CString C++
+1. strcmp() = string compare, membandingkan kedua string
+2. strtod() = string to double, mengubah inputan string ke tipe data double
