@@ -4,26 +4,75 @@
 
 vector<int> vBatasExp = { 1000, 2325, 4025, 6175, 8800, 11950, 15675, 20025, 25025 };
 
-void Karakter::CetakBatasExp(vector<int> vector){
-	for(int i : vector){
-		cout << i << endl;
-	}
-//	for(int i = 0; i < vector.size(); i++){
-//		cout << vector[i] << endl;
-//	}
+// IMPLEMENTASI CONSTRUCTOR
+Karakter::Karakter(){
+	
 }
-void Karakter::TambahHealthPoint(double hp){
-	this->HealthPoint += hp;
-}
-void Karakter::HealTarget(Karakter *karakter){
-	double hp = this->GetHealthPoint() * 0.5;
-	karakter->HealthPoint += hp;
-}
+
+// IMPLEMENTASI METHOD SETTER
 void Karakter::SetNama(string nama){
 	this->Nama = nama;
 }
+void Karakter::SetHealthPoint(double hp){
+	this->HealthPoint = hp;
+}
+void Karakter::SetExp(int exp){
+	this->Experience = exp;
+}
+void Karakter::SetLevel(int level){
+	this->Level = level;
+}
+
+// IMPLEMENTASI METHOD GETTER
 string Karakter::GetNama(){
 	return this->Nama;
+}
+double Karakter::GetHealthPoint(){
+	return this->HealthPoint;
+}
+int Karakter::GetBatasExpV(){
+	return vBatasExp[0];
+}
+int Karakter::GetExp(){
+	return this->Experience;
+}
+int Karakter::GetBatasExp(){
+	return this->BatasExp;
+}
+int const Karakter::GetLevel(){
+	return this->Level;
+}
+int Karakter::GetTier(){
+	return this->Tier;
+//	int tier = this->Tier;
+//	switch(tier){
+//		case 0:
+//			cout << "Tier 0" << endl;
+//			break;
+//		case 1:
+//			cout << "Tier 1" << endl;
+//			break;
+//		case 2:
+//			cout << "Tier 2" << endl;
+//			break;
+//	}
+}
+
+// IMPLEMENTASI METHOD TAMBAH PROPERTI
+void Karakter::TambahHealthPoint(double hp){
+	this->HealthPoint += hp;
+}
+void Karakter::TambahAllHealthPoint(double hp){
+	this->HealthPoint += hp;
+}
+void Karakter::TambahLevel(){
+	this->Level++;
+}
+
+// IMPLEMENTASI METHOD SKILL
+void Karakter::HealTarget(Karakter *karakter){
+	double hp = this->GetHealthPoint() * 0.5;
+	karakter->HealthPoint += hp;
 }
 void Karakter::HealTeam(Karakter *karakter[], int size){
 	double hp = this->GetHealthPoint() * 0.2;
@@ -32,12 +81,8 @@ void Karakter::HealTeam(Karakter *karakter[], int size){
 	}
 	cout << endl;
 }
-void Karakter::TambahAllHealthPoint(double hp){
-	this->HealthPoint += hp;
-}
-void Karakter::TambahLevel(){
-	this->Level++;
-}
+
+// IMPLEMENTASI METHOD CETAK VEKTOR
 void Karakter::PrintArray(int arr[], int size){
 	for(int i = 0; i < size; i++){
 		cout << arr[i] << ' ';
@@ -50,45 +95,33 @@ void Karakter::PrintArray(string arr[], int size){
 	}
 	cout << endl;
 }
-void Karakter::SetHealthPoint(double hp){
-	this->HealthPoint = hp;
-}
-double Karakter::GetHealthPoint(){
-	return this->HealthPoint;
-}
-Karakter::Karakter(){
-	
-}
-void Karakter::SetLevel(int level){
-	this->Level = level;
-}
-void Karakter::SetExp(int exp){
-	this->Experience = exp;
-}
+
+// IMPLEMENTASI METHOD GROWTH
 void Karakter::ConsumeExpBook(ExpBook& buku, int amount){
 	int JumlahBuku = buku.GetJumlah();
-	int JumlahPakai = amount;
-	int ExpBuku = buku.GetExp();
-	int TotalExpBuku = ExpBuku * JumlahPakai;
-	int Batas = this->BatasExp;
-	int TotalExp = this->Experience + TotalExpBuku;
-//	cout << "INIT EXP KARAKTER: " << this->GetExp() << endl;
-//	cout << "TOTAL EXP BUKU DIKALI JUMLAH BUKU: " << TotalExpBuku << endl;
-//	cout << "TOTAL EXP: " << TotalExp << endl;
-//	cout << "BATAS EXP: " << this->GetBatasExp() << endl;
 	if(JumlahBuku <= 0){
 		cout << "Jumlah Buku EXP Tidak Mencukupi!!";
 	}else{
+		int ExpBuku = buku.GetExp();
+		int JumlahPakai = amount;
+		int TotalExpBuku = ExpBuku * JumlahPakai;
+		int Batas = this->GetBatasExpV();
+		int TotalExp = this->Experience + TotalExpBuku;
 		while(TotalExp >= Batas){
 			this->Level++;
 			TotalExp -= Batas;
-			Batas =+ 20;
-//			LevelUp();
+			vBatasExp.erase(vBatasExp.begin());
+			buku.KurangJumlah(JumlahPakai);
+			//LevelUp();
 		}
+		this->SetExp(TotalExp);
 		cout << "BUKU EXP YANG TELAH DIGUNAKAN: " << JumlahPakai << endl;
-		buku.KurangJumlah(JumlahPakai);
+		
 	}
-	
+	//	cout << "INIT EXP KARAKTER: " << this->GetExp() << endl;
+//	cout << "TOTAL EXP BUKU DIKALI JUMLAH BUKU: " << TotalExpBuku << endl;
+//	cout << "TOTAL EXP: " << TotalExp << endl;
+//	cout << "BATAS EXP: " << this->GetBatasExp() << endl;
 	//cout << this->Experience;
 //	if(this->Experience >= this->BatasExp){
 //		int tampung = Experience - BatasExp;
@@ -101,25 +134,19 @@ void Karakter::ConsumeExpBook(ExpBook& buku, int amount){
 //		cout << "Hi";
 //	}
 }
-int Karakter::GetExp(){
-	return this->Experience;
-}
 void Karakter::LevelUp(){
-	while(this->Experience >= this->BatasExp){
+	int Exp, Batas;
+	Exp = this->GetExp();
+	Batas = this->GetBatasExpV();
+	while(Exp >= Batas){
 		this->Level++;
-		this->Experience -= this->BatasExp;
-		if(this->Experience <= 0){
-			this->Experience = 0;
+		Exp -= Batas;
+		if(Exp <= 0){
+			this->SetExp(0);
 		}
 		//cout << this->GetExp() << endl;
-		this->BatasExp += 20;
+		vBatasExp.erase(vBatasExp.begin());
 	}
-}
-int Karakter::GetBatasExp(){
-	return this->BatasExp;
-}
-int const Karakter::GetLevel(){
-	return this->Level;
 }
 void Karakter::LimitBreak(int level, Material tier1, Material tier2){
 	string pesan = "Tidak bisa Limit Break!!";
@@ -144,18 +171,34 @@ void Karakter::LimitBreak(int level, Material tier1, Material tier2){
 	}
 	
 }
-int Karakter::GetTier(){
-	return this->Tier;
-//	int tier = this->Tier;
-//	switch(tier){
-//		case 0:
-//			cout << "Tier 0" << endl;
-//			break;
-//		case 1:
-//			cout << "Tier 1" << endl;
-//			break;
-//		case 2:
-//			cout << "Tier 2" << endl;
-//			break;
+
+// IMPLEMENTASI METHOD CETAK
+void Karakter::CetakExp(){
+	cout << "Exp Karakter: " << this->GetExp() << endl;
+}
+void Karakter::CetakBatasExp(vector<int> vector){
+	for(int i : vector){
+		cout << i << endl;
+	}
+//	for(int i = 0; i < vector.size(); i++){
+//		cout << vector[i] << endl;
 //	}
+}
+void Karakter::CetakLv(){
+	cout << "Level Karakter: " << this->GetLevel() << endl;
+}
+void Karakter::CetakHP(){
+	cout << "HealthPoint Karakter: " << this->GetHealthPoint() << endl;
+}
+void Karakter::CetakTier(){
+	cout << "Tier Karakter: " << this->GetTier() << endl;
+}
+void Karakter::CetakNama(){
+	cout << "Nama Karakter: " << this->GetNama() << endl;
+}
+void Karakter::CetakBatasExp(){
+	cout << "Batas Exp Karakter: " << this->GetBatasExpV() << endl;
+}
+void Karakter::Display(){
+	
 }

@@ -12,34 +12,37 @@ void PrintLevel(Karakter *karakter[], int size){
 	}
 }
 int main(){
+	HeroWit->CetakAmount();
 	//Bagian 1: Penggunaan EXP BOOK
-	Karakter *AratakiItto = new Karakter();
-	WandererAdvice->SetJumlah(10);
-	
-	//DATA AWAL (SEBELUM LEVEL UP)
-	cout << "Level Awal Karakter: " << AratakiItto->GetLevel() << endl;
-	cout << "Exp Awal Karakter: " << AratakiItto->GetExp() << endl;
-	cout << "Batas Awal EXP karakter: " << AratakiItto->GetBatasExp() << endl;
-	cout << "Jumlah EXP BOOK: " << WandererAdvice->GetJumlah() << endl;
-	
-	AratakiItto->SetExp(100);
-	AratakiItto->ConsumeExpBook(*WandererAdvice, 6);
-	
-	//DATA AKHIR (SESUDAH LEVEL UP)
-	cout << "Level Awal Karakter: " << AratakiItto->GetLevel() << endl;
-	cout << "Exp Akhir: " << AratakiItto->GetExp() << endl;
-	cout << "Batas Akhir EXP karakter: " << AratakiItto->GetBatasExp() << endl;
-	cout << "Jumlah EXP BOOK: " << WandererAdvice->GetJumlah() << endl;
-	
-	cout << endl;
+//	Karakter *AratakiItto = new Karakter();
+//	WandererAdvice->SetJumlah(10);
+//	HeroWit->SetJumlah(5);
+//	
+//	//DATA AWAL (SEBELUM LEVEL UP)
+//	AratakiItto->CetakLv();
+//	cout << "Exp Awal Karakter: " << AratakiItto->GetExp() << endl;
+//	cout << "Batas Awal EXP karakter: " << AratakiItto->GetBatasExpV() << endl;
+//	HeroWit->CetakJumlah();
+//	
+//	AratakiItto->SetExp(100);
+//	AratakiItto->ConsumeExpBook(*WandererAdvice, 1);
+//	
+//	//DATA AKHIR (SESUDAH LEVEL UP)
+//	AratakiItto->CetakLv();
+//	cout << "Exp Akhir: " << AratakiItto->GetExp() << endl;
+//	cout << "Batas Akhir EXP karakter: " << AratakiItto->GetBatasExpV() << endl;
+//	HeroWit->CetakJumlah();
+//	
+//	cout << endl;
 	
 //	AratakiItto->CetakBatasExp(vBatasExp);
 //	vBatasExp.erase(vBatasExp.begin());
 //	cout << endl;
 //	AratakiItto->CetakBatasExp(vBatasExp);
-	cout << vBatasExp.front() << endl;
-	vBatasExp.erase(vBatasExp.begin());
-	cout << vBatasExp.front() << endl;
+//	cout << vBatasExp.front() << endl;
+//	AratakiItto->LevelUp();
+////	vBatasExp.erase(vBatasExp.begin());
+//	cout << vBatasExp.front() << endl;
 //	vector<int>::iterator it = vint.begin() + 1;
 	
 //	vector<int> vLevelChar = {0};
