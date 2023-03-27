@@ -3,6 +3,7 @@
 #include "Akun.cpp"
 
 vector<int> vBatasExp = { 1000, 2325, 4025, 6175, 8800, 11950, 15675, 20025, 25025 };
+vector<int> vAscend = { 0, 1, 2, 3, 4, 5, 6 };
 
 // IMPLEMENTASI CONSTRUCTOR
 Karakter::Karakter(){
@@ -30,8 +31,8 @@ string Karakter::GetNama(){
 double Karakter::GetHealthPoint(){
 	return this->HealthPoint;
 }
-int Karakter::GetBatasExpV(){
-	return vBatasExp[0];
+int Karakter::GetBatasExpV(vector<int> vector){
+	return vector[0];
 }
 int Karakter::GetExp(){
 	return this->Experience;
@@ -99,24 +100,29 @@ void Karakter::PrintArray(string arr[], int size){
 // IMPLEMENTASI METHOD GROWTH
 void Karakter::ConsumeExpBook(ExpBook& buku, int amount){
 	int JumlahBuku = buku.GetJumlah();
-	if(JumlahBuku <= 0){
+	cout << "Jumlah buku exp: " << JumlahBuku << endl;
+	if(JumlahBuku <= 0 || amount > JumlahBuku){
 		cout << "Jumlah Buku EXP Tidak Mencukupi!!";
 	}else{
+		int Ascend = this->GetAscend();
+		int Level = this->GetLevel();
+		if(Ascend = 0)
+		int Batas = this->GetBatasExpV(vBatasExp);		
 		int ExpBuku = buku.GetExp();
-		int JumlahPakai = amount;
-		int TotalExpBuku = ExpBuku * JumlahPakai;
-		int Batas = this->GetBatasExpV();
+		int TotalExpBuku = ExpBuku * amount;
 		int TotalExp = this->Experience + TotalExpBuku;
 		while(TotalExp >= Batas){
 			this->Level++;
-			TotalExp -= Batas;
+			Batas = vBatasExp.front();
+			if(TotalExp <= Batas){
+				
+			}else{
+				TotalExp -= Batas;
+			}
 			vBatasExp.erase(vBatasExp.begin());
-			buku.KurangJumlah(JumlahPakai);
-			//LevelUp();
+			this->SetExp(TotalExp);
 		}
-		this->SetExp(TotalExp);
-		cout << "BUKU EXP YANG TELAH DIGUNAKAN: " << JumlahPakai << endl;
-		
+		buku.KurangJumlah(amount);
 	}
 	//	cout << "INIT EXP KARAKTER: " << this->GetExp() << endl;
 //	cout << "TOTAL EXP BUKU DIKALI JUMLAH BUKU: " << TotalExpBuku << endl;
@@ -137,7 +143,7 @@ void Karakter::ConsumeExpBook(ExpBook& buku, int amount){
 void Karakter::LevelUp(){
 	int Exp, Batas;
 	Exp = this->GetExp();
-	Batas = this->GetBatasExpV();
+	Batas = this->GetBatasExpV(vBatasExp);
 	while(Exp >= Batas){
 		this->Level++;
 		Exp -= Batas;
@@ -197,7 +203,7 @@ void Karakter::CetakNama(){
 	cout << "Nama Karakter: " << this->GetNama() << endl;
 }
 void Karakter::CetakBatasExp(){
-	cout << "Batas Exp Karakter: " << this->GetBatasExpV() << endl;
+	cout << "Batas Exp Karakter: " << this->GetBatasExpV(vBatasExp) << endl;
 }
 void Karakter::Display(){
 	

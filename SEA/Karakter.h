@@ -27,7 +27,7 @@ class Karakter{
 		// METHOD GETTER
 		string GetNama();
 		double GetHealthPoint();
-		int GetBatasExpV();
+		int GetBatasExpV(vector<int> vector);
 		int GetExp();
 		int GetBatasExp();
 		int const GetLevel();
