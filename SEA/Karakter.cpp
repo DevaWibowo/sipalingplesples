@@ -2,8 +2,9 @@
 #include "Karakter.h"
 #include "Akun.cpp"
 
-vector<int> vBatasExp = { 1000, 2325, 4025, 6175, 8800, 11950, 15675, 20025, 25025 };
+vector<int> vBatasExp = { 1000,1325,1700,2150,2625,3150,3725,4350,5000,5700,6450,7225,8050,8925,9825,10750,11725,12725,13775,14875,16800,18000,19250,20550,21875,23250,24650,26100,27575,29100 };
 vector<int> vAscend = { 0, 1, 2, 3, 4, 5, 6 };
+vector<int> vLimit = { 20, 40, 50, 60, 70, 80, 90};
 
 // IMPLEMENTASI CONSTRUCTOR
 Karakter::Karakter(){
@@ -23,6 +24,12 @@ void Karakter::SetExp(int exp){
 void Karakter::SetLevel(int level){
 	this->Level = level;
 }
+void Karakter::SetLimitLevel(int limit){
+	this->LimitLevel = limit;
+}
+void Karakter::SetAscend(int ascend){
+	this->Ascend = ascend;
+}
 
 // IMPLEMENTASI METHOD GETTER
 string Karakter::GetNama(){
@@ -32,7 +39,8 @@ double Karakter::GetHealthPoint(){
 	return this->HealthPoint;
 }
 int Karakter::GetBatasExpV(vector<int> vector){
-	return vector[0];
+	int Level = this->GetLevel();
+	return vector[Level-1];
 }
 int Karakter::GetExp(){
 	return this->Experience;
@@ -57,6 +65,37 @@ int Karakter::GetTier(){
 //			cout << "Tier 2" << endl;
 //			break;
 //	}
+}
+int Karakter::GetAscend(){
+	return this->Ascend;
+}
+int Karakter::GetLimitLevel(){
+	int ascend = this->GetAscend();
+	switch(ascend){
+		case 0:
+			return vLimit[0];
+			break;
+		case 1:
+			return vLimit[1];
+			break;
+		case 2:
+			return vLimit[2];
+			break;
+		case 3:
+			return vLimit[3];
+			break;
+		case 4:
+			return vLimit[4];
+			break;
+		case 5:
+			return vLimit[5];
+			break;
+		case 6:
+			return vLimit[6];
+			break;
+		default:
+			return 0;
+	}
 }
 
 // IMPLEMENTASI METHOD TAMBAH PROPERTI
@@ -99,31 +138,38 @@ void Karakter::PrintArray(string arr[], int size){
 
 // IMPLEMENTASI METHOD GROWTH
 void Karakter::ConsumeExpBook(ExpBook& buku, int amount){
+	int Limit = this->GetLimitLevel();
+	int Level = this->GetLevel();
+	
 	int JumlahBuku = buku.GetJumlah();
-	cout << "Jumlah buku exp: " << JumlahBuku << endl;
 	if(JumlahBuku <= 0 || amount > JumlahBuku){
 		cout << "Jumlah Buku EXP Tidak Mencukupi!!";
 	}else{
-		int Ascend = this->GetAscend();
-		int Level = this->GetLevel();
-		if(Ascend = 0)
-		int Batas = this->GetBatasExpV(vBatasExp);		
+		int Batas = vBatasExp[Level-1];
+		//int Batas1 = this->GetBatasExpV(vBatasExp);
+		
 		int ExpBuku = buku.GetExp();
 		int TotalExpBuku = ExpBuku * amount;
 		int TotalExp = this->Experience + TotalExpBuku;
 		while(TotalExp >= Batas){
-			this->Level++;
-			Batas = vBatasExp.front();
-			if(TotalExp <= Batas){
+			if(Level == Batas){
 				
 			}else{
-				TotalExp -= Batas;
+				
+				this->Level++;
+				if(TotalExp < Batas){
+					
+				}else{
+					TotalExp -= Batas;
+				}
+				this->SetExp(TotalExp);
 			}
-			vBatasExp.erase(vBatasExp.begin());
-			this->SetExp(TotalExp);
 		}
 		buku.KurangJumlah(amount);
 	}
+
+	
+	
 	//	cout << "INIT EXP KARAKTER: " << this->GetExp() << endl;
 //	cout << "TOTAL EXP BUKU DIKALI JUMLAH BUKU: " << TotalExpBuku << endl;
 //	cout << "TOTAL EXP: " << TotalExp << endl;

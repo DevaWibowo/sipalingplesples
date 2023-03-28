@@ -14,27 +14,29 @@ void PrintLevel(Karakter *karakter[], int size){
 int main(){
 	//Bagian 1: Penggunaan EXP BOOK
 	Karakter *AratakiItto = new Karakter();
-	WandererAdvice->SetJumlah(10);
-	HeroWit->SetJumlah(5);
+	AratakiItto->SetAscend(0);
 	
+//	WandererAdvice->SetJumlah(10);
+	HeroWit->SetJumlah(10);
 	
+	AratakiItto->SetLevel(20);
 	//DATA AWAL (SEBELUM LEVEL UP)
-	AratakiItto->CetakLv();
-	AratakiItto->CetakExp();
-	AratakiItto->CetakBatasExp();
-	HeroWit->CetakJumlah();
-	cout << endl;
+//	AratakiItto->CetakLv();
+//	AratakiItto->CetakExp();
+//	AratakiItto->CetakBatasExp();
+//	HeroWit->CetakJumlah();
+//	cout << endl;
 	
 //	AratakiItto->SetExp(100);
-	AratakiItto->ConsumeExpBook(*HeroWit, 6);
+	AratakiItto->ConsumeExpBook(*HeroWit, 1);
 	
 	//DATA AKHIR (SESUDAH LEVEL UP)
-	AratakiItto->CetakLv();
-	AratakiItto->CetakExp();
-	AratakiItto->CetakBatasExp();
-	HeroWit->CetakJumlah();
-	
-	cout << endl;
+//	AratakiItto->CetakLv();
+//	AratakiItto->CetakExp();
+//	AratakiItto->CetakBatasExp();
+//	HeroWit->CetakJumlah();
+//	
+//	cout << endl;
 	
 //	AratakiItto->CetakBatasExp(vBatasExp);
 //	vBatasExp.erase(vBatasExp.begin());

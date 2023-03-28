@@ -3,7 +3,7 @@
 
 ExpBook* WandererAdvice = new ExpBook(1, "Wanderer's' Advice", 1000);
 ExpBook* AdventurerExperience = new ExpBook(2, "Adventurer's' Experience", 5000);
-ExpBook* HeroWit = new ExpBook(3, "Hero's Wit", 20000);
+ExpBook* HeroWit = new ExpBook(3, "Hero's Wit", 1000);
 
 // IMPLEMENTADI CONSTRUCTOR
 ExpBook::ExpBook(int id, string nama, int amount) : ID(id), Nama(nama), AmountExp(amount){

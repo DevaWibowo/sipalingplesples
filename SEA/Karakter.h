@@ -10,7 +10,7 @@ using namespace std;
 
 class Karakter{
 	private:
-		int Level=1, Experience=0, BatasExp=50, Tier=0;
+		int Level=1, Experience=0, BatasExp=50, Tier=0, LimitLevel=20, Ascend=0;
 		double HealthPoint;
 		string Nama;
 		
@@ -23,6 +23,8 @@ class Karakter{
 		void SetExp(int exp);
 		void SetLevel(int level);
 		void SetHealthPoint(double hp);
+		void SetLimitLevel(int limit);
+		void SetAscend(int ascend);
 		
 		// METHOD GETTER
 		string GetNama();
@@ -32,6 +34,8 @@ class Karakter{
 		int GetBatasExp();
 		int const GetLevel();
 		int GetTier();
+		int GetLimitLevel();
+		int GetAscend();
 		
 		// METHOD TAMBAH PROPERTI
 		void TambahLevel(int level);
